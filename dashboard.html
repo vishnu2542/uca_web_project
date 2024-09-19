@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendor Dashboard</title>
+    <link rel="stylesheet" href="assets/styles/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+<body>
+    <div class="dashboard-container">
+        <h2>Welcome, Vendor</h2>
+        <div class="balance-section">
+            <h3>Current Balance: $<span id="currentBalance">0</span></h3>
+            <button onclick="addBalance()">Add Balance</button>
+        </div>
+        
+        <div class="stock-management">
+            <h3>Stock Management</h3>
+            <form id="stockForm">
+                <input type="text" id="itemName" placeholder="Item Name" required>
+                <input type="number" id="itemQuantity" placeholder="Quantity" required>
+                <input type="number" id="itemPrice" placeholder="Price per Unit" required>
+                <button type="submit">Add/Update Stock</button>
+            </form>
+            <div id="stockList"></div>
+        </div>
+
+        <div class="sales-management">
+            <h3>Manage Sales</h3>
+            <form id="salesForm">
+                <input type="text" id="salesItem" placeholder="Item Sold" required>
+                <input type="number" id="salesQuantity" placeholder="Quantity Sold" required>
+                <button type="submit">Record Sale</button>
+            </form>
+        </div>
+
+        <div class="expense-management">
+            <h3>Expenses</h3>
+            <form id="expenseForm">
+                <input type="text" id="expenseDesc" placeholder="Expense Description" required>
+                <input type="number" id="expenseAmount" placeholder="Expense Amount" required>
+                <button type="submit">Record Expense</button>
+            </form>
+        </div>
+
+        <div class="profit-summary">
+            <h3>Profit Summary</h3>
+            <canvas id="profitGraph"></canvas>
+        </div>
+    </div>
+
+    <script src="assets/scripts/main.js"></script>
+</body>
+</html>
