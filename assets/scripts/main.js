@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentBalance = 0;
     let stock = {};
     let dailyProfits = []; // Array to store daily profits
+    let dailyExpenses = []; // Array to store daily expenses
 
     // Event Listeners for forms
     document.getElementById('stockForm').addEventListener('submit', addOrUpdateStock);
@@ -54,6 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
             dailyProfits.push(itemProfit); // Store profit for the day
             updateBalance();
             displayStock();
+            displaySales(salesItem, salesQuantity, itemProfit); // Record sale in table
             drawProfitGraph(); // Redraw the graph
 
             alert(`Sold ${salesQuantity} of ${salesItem}. Profit: $${itemProfit.toFixed(2)}`);
@@ -69,7 +71,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const expenseAmount = parseFloat(document.getElementById("expenseAmount").value);
 
         currentBalance -= expenseAmount;
+        dailyExpenses.push(expenseAmount); // Store expense for the day
         updateBalance();
+        displayExpenses(expenseDesc, expenseAmount); // Record expense in table
+        drawExpenseGraph(); // Redraw the expense graph
     }
 
     // Update Balance Display
@@ -85,6 +90,20 @@ document.addEventListener("DOMContentLoaded", () => {
         for (let item in stock) {
             stockListEl.innerHTML += `<p>${item}: ${stock[item].quantity} units @ $${stock[item].price} each, Profit: ${stock[item].profitPercent}%</p>`;
         }
+    }
+
+    // Display Sales in Table
+    function displaySales(item, quantity, profit) {
+        const salesTable = document.getElementById("salesTable");
+        const row = salesTable.insertRow();
+        row.innerHTML = `<td>${item}</td><td>${quantity}</td><td>$${profit.toFixed(2)}</td>`;
+    }
+
+    // Display Expenses in Table
+    function displayExpenses(description, amount) {
+        const expensesTable = document.getElementById("expensesTable");
+        const row = expensesTable.insertRow();
+        row.innerHTML = `<td>${description}</td><td>$${amount.toFixed(2)}</td>`;
     }
 
     // Profit Visualization (using Chart.js)
@@ -118,5 +137,37 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    drawProfitGraph(); // Initial call to draw an empty graph
+    // Expense Visualization (using Chart.js)
+    function drawExpenseGraph() {
+        const ctx = document.getElementById('expenseGraph').getContext('2d');
+
+        // Clear existing graph if it exists
+        if (window.expenseChart) {
+            window.expenseChart.destroy();
+        }
+
+        // Create the chart
+        window.expenseChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: Array.from({ length: dailyExpenses.length }, (_, i) => `Day ${i + 1}`), // Dynamic labels
+                datasets: [{
+                    label: 'Daily Expense',
+                    data: dailyExpenses,
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    }
+
+    drawProfitGraph(); // Initial call to draw an empty profit graph
+    drawExpenseGraph(); // Initial call to draw an empty expense graph
 });

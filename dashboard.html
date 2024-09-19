@@ -6,9 +6,18 @@
     <title>Vendor Dashboard</title>
     <link rel="stylesheet" href="assets/styles/styles.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 </head>
 <body>
+    <header>
+        <div class="header-container">
+            <img src="assets/images/logo.png" alt="Logo" class="logo"> <!-- Replace with your logo path -->
+            <div class="profile-section">
+                <span id="usernameDisplay"></span> <!-- Placeholder for username -->
+                <button id="logoutButton">Logout</button>
+            </div>
+        </div>
+    </header>
+
     <div class="dashboard-container">
         <h2>Welcome, Vendor</h2>
         <div class="balance-section">
@@ -34,6 +43,16 @@
                 <input type="number" id="salesQuantity" placeholder="Quantity Sold" required>
                 <button type="submit">Record Sale</button>
             </form>
+            <table id="salesTable">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Quantity</th>
+                        <th>Profit</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
         </div>
 
         <div class="expense-management">
@@ -43,14 +62,36 @@
                 <input type="number" id="expenseAmount" placeholder="Expense Amount" required>
                 <button type="submit">Record Expense</button>
             </form>
+            <table id="expensesTable">
+                <thead>
+                    <tr>
+                        <th>Description</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
         </div>
 
         <div class="profit-summary">
             <h3>Profit Summary</h3>
             <canvas id="profitGraph"></canvas>
+            <canvas id="expenseGraph"></canvas>
         </div>
     </div>
 
     <script src="assets/scripts/main.js"></script>
+    <script>
+        // Display the logged-in username
+        const users = JSON.parse(localStorage.getItem("users")) || [];
+        const loggedInUsername = users[0] ? users[0].username : "Vendor"; // Replace with actual user logic
+        document.getElementById("usernameDisplay").textContent = loggedInUsername;
+
+        // Logout button functionality
+        document.getElementById("logoutButton").addEventListener("click", () => {
+            // Optionally clear local storage or perform other logout actions
+            window.location.href = "index.html"; // Redirect to login page
+        });
+    </script>
 </body>
 </html>
