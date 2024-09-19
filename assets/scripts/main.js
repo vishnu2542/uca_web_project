@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const currentBalanceEl = document.getElementById("currentBalance");
     let currentBalance = 0;
     let stock = {};
+    let dailyProfits = []; // Array to store daily profits
 
     // Event Listeners for forms
     document.getElementById('stockForm').addEventListener('submit', addOrUpdateStock);
@@ -50,8 +51,10 @@ document.addEventListener("DOMContentLoaded", () => {
             const saleTotal = stock[salesItem].price * salesQuantity + itemProfit;
             currentBalance += saleTotal;
 
+            dailyProfits.push(itemProfit); // Store profit for the day
             updateBalance();
             displayStock();
+            drawProfitGraph(); // Redraw the graph
 
             alert(`Sold ${salesQuantity} of ${salesItem}. Profit: $${itemProfit.toFixed(2)}`);
         } else {
@@ -87,13 +90,20 @@ document.addEventListener("DOMContentLoaded", () => {
     // Profit Visualization (using Chart.js)
     function drawProfitGraph() {
         const ctx = document.getElementById('profitGraph').getContext('2d');
-        new Chart(ctx, {
+
+        // Clear existing graph if it exists
+        if (window.profitChart) {
+            window.profitChart.destroy();
+        }
+
+        // Create the chart
+        window.profitChart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5'],
+                labels: Array.from({ length: dailyProfits.length }, (_, i) => `Day ${i + 1}`), // Dynamic labels
                 datasets: [{
                     label: 'Daily Profit',
-                    data: [12, 19, 3, 5, 2],
+                    data: dailyProfits,
                     borderColor: 'rgba(75, 192, 192, 1)',
                     borderWidth: 1
                 }]
@@ -108,5 +118,5 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    drawProfitGraph();
+    drawProfitGraph(); // Initial call to draw an empty graph
 });
