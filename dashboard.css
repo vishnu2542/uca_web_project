@@ -1,0 +1,470 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+
+}
+
+/* header section contains logo, profile, about us contact us styling */
+header {
+    background: linear-gradient(90deg, #052f5b, #00bfff);
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+    width: 100%;
+    position: relative;
+
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.logo {
+    height: 50px;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+}
+
+.logo a {
+    text-decoration: none;
+    color: white;
+    font-size: 35px;
+
+    
+}
+
+.profile-section {
+display: flex;
+align-items: center;
+}
+
+.profile-section a {
+color: white;
+margin: 0 10px;
+text-decoration: none;
+}
+
+.profile-section a:hover {
+color: #333;
+}
+
+.profile-icon {
+width: 30px;
+height: 30px;
+margin: 0 10px;
+}
+
+#usernameDisplay {
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+#logoutButton {
+    background-color: white;
+    color:#333;
+    font-weight: bolder;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+#logoutButton:hover {
+    background-color: #333;
+    color: white;
+}
+
+/* hamburger part for responsive design */
+.hamburger {
+display: none;
+flex-direction: column;
+cursor: pointer;      
+}
+
+.hamburger div {
+width: 25px;
+height: 3px;
+background-color: white;
+margin: 4px 0;
+transition: 0.4s;
+}
+
+/* main dashboard styling */
+.dashboard-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.balance-section {
+    font-size: 30px;
+    color: whitesmoke;
+    font-weight: bold;
+    text-align: center;
+    
+    margin-right: 40%;
+    padding-top: 0%;
+    
+}
+
+/* initial view and then two sections left and right*/
+.initial-view {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 0px;
+}
+
+.left-section {
+    width: 80%;
+    padding-top: 0px;
+    margin-bottom: 5%;
+    
+}
+
+.left-section img {
+    max-width: 100%;
+    height: 10%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.balance-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 45%;
+    padding: 0px;
+}
+
+/* features buttons like stock management etc. */
+.nav-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 100%;
+    margin-top: 0;
+    padding-left: 0;
+    margin-bottom: 40%;
+}
+
+.nav-button, .back-button {
+    margin: 10px 300px ;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 100px;
+    width: 60%;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.nav-button:hover, .back-button:hover {
+    background-color: #333;
+}
+
+.hidden {
+    display: none;
+}
+
+.nav-buttons {
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+gap: 10px;
+margin-right: 300px;
+}
+
+.nav-button {
+position: relative;
+padding: 12px 24px;
+font-size: 16px;
+font-weight: bold;
+color: white;
+background-color: #052f5b;
+border: none;
+cursor: pointer;
+opacity: 0;
+transform: translateX(-100px);
+transition: background-color 0.3s;
+animation: slideIn 0.5s ease-out forwards;
+clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 50%, calc(100% - 20px) 100%, 0 100%);
+border-radius: 8px;
+}
+
+.nav-button:hover {
+background-color: #333;
+}
+
+/* animations for nav buttons / features button */
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Animation Delay for Each Button */
+#showStockManagement {
+animation-delay: 0.1s;
+}
+
+#showSalesManagement {
+animation-delay: 0.2s;
+}
+
+#showExpenseManagement {
+animation-delay: 0.3s;
+}
+
+#showProfitSummary {
+animation-delay: 0.4s;
+}
+
+/* Adding a triangular tip to mimic a pencil shape on buttons */
+.nav-button:before {
+content: '';
+position: absolute;
+top: 50%;
+right: -10px;
+width: 0;
+height: 0;
+border-left: 10px solid #007bff;
+border-top: 12px solid transparent;
+border-bottom: 12px solid transparent;
+transform: translateY(-50%);
+}
+
+.nav-button:hover:before {
+border-left-color: #333;
+}
+
+/* styling heading of each feature section */
+.feature-header  {
+font-size: 20px;
+color: white;
+text-align: center;
+padding: 20px;
+background: linear-gradient(90deg, #052f5b, #00bfff);
+border-radius: 10px;
+box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+margin: 20px auto;
+width: 80%;
+font-weight: bold;
+letter-spacing: 3px;
+text-transform: uppercase;
+}
+
+.back-button {
+    margin-bottom: 0px ;
+    padding: 10px 20px;
+    background-color: #052f5b;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 100px;
+    width: 30%;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+/* table and data styling of each feature */
+table {
+width: 100%;
+border-collapse: collapse;
+margin-top: 10px;
+box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+border-radius: 10px;
+overflow: hidden; 
+}
+
+table, th, td {
+border: 1px solid #ddd;
+}
+
+th, td {
+padding: 12px;
+text-align: center;
+font-size: 16px;
+}
+
+th {
+background-color: #052f5b;
+color: white;
+font-weight: bold;
+text-transform: uppercase;
+letter-spacing: 1px;
+}
+
+td {
+background-color: #f9f9f9;
+color: #333;
+}
+
+tr:nth-child(even) td {
+background-color: #f1f1f1;
+}
+
+/* Form Styleing of each section */
+form input {
+padding: 12px;
+margin: 10px 0;
+width: 100%;
+box-sizing: border-box;
+border: 1px solid #ddd;
+border-radius: 4px;
+background-color: #f0f8ff;
+font-size: 16px;
+transition: border 0.3s ease;
+}
+
+form input:focus {
+border-color: #007bff;
+outline: none;
+}
+
+form button {
+padding: 12px;
+width: 100%;
+background-color: #052f5b;
+color: white;
+border: none;
+cursor: pointer;
+border-radius: 6px;
+font-size: 16px;
+transition: background-color 0.3s ease;
+margin-top: 10px;
+}
+
+form button:hover {
+background-color: #0056b3;
+}
+
+/* footer and social media icons styling */
+footer {
+    position:relative;
+    margin-top: 8.5%;
+    width: 98%;
+    background: linear-gradient(90deg, #052f5b, #00bfff);
+    color: #fff;
+    text-align: center;
+    padding: 15px;
+}
+
+footer .social-icons {
+    margin-top: 10px;
+}
+
+footer .social-icons a {
+    color: #fff;
+    margin: 0 10px;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+footer .social-icons a:hover {
+    color: #333;
+}
+
+/* Responsive Styling */
+@media (max-width: 600px) {
+    .header-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .logo {
+        margin-bottom: 10px;
+    }
+
+    .profile-section {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .nav-button {
+        width: 60%;
+        margin-left: 25%;
+    }
+    .back-button {
+        width: 40%;
+        margin-left: 30%;
+    }
+
+    .initial-view {
+        flex-direction: column; /* Stack elements on small screens */
+        align-items: center;
+    }
+
+    .balance-info {
+        width: 100%; /* Full width on smaller screens */
+        align-items: center; /* Center items */
+    }
+
+    table , th ,td,form input,form button {
+        width: 90%;
+    }
+
+    form input{
+        text-align: center;
+    }
+
+    table , th ,td
+    {
+        align-items: center;
+    }
+
+    .feature-header{
+        width: 70%;
+    }
+    
+
+}
+
+/* responsive design using media query */
+@media (max-width: 768px) {
+    .profile-section a, .profile-icon, #usernameDisplay, #logoutButton
+    {
+        display: none;
+    }
+
+    .hamburger
+    {
+        display: flex; 
+    }
+
+    .header-container
+    {
+        justify-content: space-between;
+    }
+
+/* Show menu when active used for hamburgur */
+    .profile-section.active a, .profile-section.active .profile-icon, 
+    .profile-section.active #usernameDisplay, .profile-section.active #logoutButton
+    {
+        display: block;
+        background-color: #007bff;
+        text-align: center;
+        margin: 10px 0;
+    }
+
+    .profile-section.active 
+    {
+        flex-direction: column;
+    }
+}
