@@ -4,40 +4,71 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vendor Dashboard</title>
-    <link rel="stylesheet" href="assets/styles/styles.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="dashboard.css">
 </head>
 <body>
+    <!-- header contains logo , profile, about us,contact us -->
     <header>
         <div class="header-container">
-            <img src="assets/images/logo.png" alt="Logo" class="logo"> <!-- Replace with your logo path -->
+            <div class="logo"><a href="index.html">Biz Balance</a></div>
             <div class="profile-section">
-                <span id="usernameDisplay"></span> <!-- Placeholder for username -->
-                <button id="logoutButton">Logout</button>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+                <img src="assets/Screenshot 2024-09-20 120948.png" alt="Profile" class="profile-icon"> <!-- Replace with your profile icon path -->
+                <span id="usernameDisplay"></span>
+                <button id="logoutButton"><i class="fa-solid fa-right-from-bracket"></i></button>
+            </div>
+            <div class="hamburger">
+                <div></div>
+                <div></div>
+                <div></div>
             </div>
         </div>
     </header>
-
+    
+    <!-- dashborad section containing all features -->
     <div class="dashboard-container">
-        <h2>Welcome, Vendor</h2>
-        <div class="balance-section">
-            <h3>Current Balance: $<span id="currentBalance">0</span></h3>
-            <button onclick="addBalance()">Add Balance</button>
+        <!-- Initial View: Current Balance and Navigation Buttons -->
+        <div id="initialView" class="initial-view">
+            <div class="left-section">
+                <img src="assets/Screenshot 2024-09-20 154526.png" alt="Business Image">
+            </div>
+            <div class="balance-info">
+                <div class="balance-section">
+                    <h3 class="feature-header">Current Balance: $<span id="currentBalance">0</span></h3>
+                </div>
+                <div class="nav-buttons">
+                    <button class="nav-button" id="showStockManagement">Stock Management</button>
+                    <button class="nav-button" id="showSalesManagement">Sales Management</button>
+                    <button class="nav-button" id="showExpenseManagement">Expenses</button>
+                    <button class="nav-button" id="showProfitSummary">Profit Summary</button>
+                </div>
+            </div>
         </div>
-        
-        <div class="stock-management">
-            <h3>Stock Management</h3>
+
+        <!-- Stock Management Section -->
+        <div id="stockManagement" class="hidden">
+            <h1 class="feature-header">Stock Management</h1>
+
+            <button class="back-button" id="backToBalanceFromStock">Back to Balance</button>
             <form id="stockForm">
                 <input type="text" id="itemName" placeholder="Item Name" required>
                 <input type="number" id="itemQuantity" placeholder="Quantity" required>
                 <input type="number" id="itemPrice" placeholder="Price per Unit" required>
                 <button type="submit">Add/Update Stock</button>
             </form>
+
             <div id="stockList"></div>
         </div>
 
-        <div class="sales-management">
-            <h3>Manage Sales</h3>
+        <!-- Sales Management Section -->
+        <div id="salesManagement" class="hidden">
+            <h1 class="feature-header" >Manage Sales</h3>
+            <button class="back-button" id="backToBalanceFromSales">Back to Balance</button>
             <form id="salesForm">
                 <input type="text" id="salesItem" placeholder="Item Sold" required>
                 <input type="number" id="salesQuantity" placeholder="Quantity Sold" required>
@@ -55,8 +86,10 @@
             </table>
         </div>
 
-        <div class="expense-management">
-            <h3>Expenses</h3>
+        <!-- Expense Management Section -->
+        <div id="expenseManagement" class="hidden">
+            <h1 class="feature-header">Expenses</h1>
+            <button class="back-button" id="backToBalanceFromExpenses">Back to Balance</button>
             <form id="expenseForm">
                 <input type="text" id="expenseDesc" placeholder="Expense Description" required>
                 <input type="number" id="expenseAmount" placeholder="Expense Amount" required>
@@ -73,25 +106,97 @@
             </table>
         </div>
 
-        <div class="profit-summary">
-            <h3>Profit Summary</h3>
+        <!-- Profit Summary Section -->
+        <div id="profitSummary" class="hidden">
+            <h1 class="feature-header">Profit Summary</h1>
+            <button class="back-button" id="backToBalanceFromProfit">Back to Balance</button>
             <canvas id="profitGraph"></canvas>
             <canvas id="expenseGraph"></canvas>
         </div>
     </div>
-
-    <script src="assets/scripts/main.js"></script>
+    
+    <!-- footer containing social media icons -->
+    <footer>
+        <p>Reach out us on</p>
+        <div class="social-icons">
+            <a href="https://www.facebook.com" target="_blank"><i class="fa-brands fa-facebook"></i></a> |
+            <a href="https://www.instagram.com" target="_blank"><i class="fa-brands fa-instagram"></i></a> |
+            <a href="https://www.twitter.com" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+        </div>
+        <p>&copy; 2024 Bizbalance All rights reserved.</p>
+    </footer>
+    
+    <!-- javascript for handling things -->
+    <script src="main.js"></script>
     <script>
         // Display the logged-in username
         const users = JSON.parse(localStorage.getItem("users")) || [];
-        const loggedInUsername = users[0] ? users[0].username : "Vendor"; // Replace with actual user logic
+        const loggedInUsername = localStorage.getItem("loggedInUser") || (users[0] ? users[0].username : "Vendor");
         document.getElementById("usernameDisplay").textContent = loggedInUsername;
 
         // Logout button functionality
         document.getElementById("logoutButton").addEventListener("click", () => {
-            // Optionally clear local storage or perform other logout actions
+            localStorage.removeItem("loggedInUser"); // Remove logged-in user
             window.location.href = "index.html"; // Redirect to login page
         });
+
+        // Section display management
+        const initialView = document.getElementById('initialView');
+        const stockManagement = document.getElementById('stockManagement');
+        const salesManagement = document.getElementById('salesManagement');
+        const expenseManagement = document.getElementById('expenseManagement');
+        const profitSummary = document.getElementById('profitSummary');
+
+        document.getElementById("showStockManagement").addEventListener("click", () => {
+            initialView.classList.add("hidden");
+            stockManagement.classList.remove("hidden");
+        });
+
+        document.getElementById("showSalesManagement").addEventListener("click", () => {
+            initialView.classList.add("hidden");
+            salesManagement.classList.remove("hidden");
+        });
+
+        document.getElementById("showExpenseManagement").addEventListener("click", () => {
+            initialView.classList.add("hidden");
+            expenseManagement.classList.remove("hidden");
+        });
+
+        document.getElementById("showProfitSummary").addEventListener("click", () => {
+            initialView.classList.add("hidden");
+            profitSummary.classList.remove("hidden");
+            renderProfitGraph(); // Call the function to render profit graph
+            renderExpenseGraph(); // Call the function to render expense graph
+        });
+
+        // Back button functionalities
+        document.getElementById("backToBalanceFromStock").addEventListener("click", () => {
+            stockManagement.classList.add("hidden");
+            initialView.classList.remove("hidden");
+        });
+
+        document.getElementById("backToBalanceFromSales").addEventListener("click", () => {
+            salesManagement.classList.add("hidden");
+            initialView.classList.remove("hidden");
+        });
+
+        document.getElementById("backToBalanceFromExpenses").addEventListener("click", () => {
+            expenseManagement.classList.add("hidden");
+            initialView.classList.remove("hidden");
+        });
+
+        document.getElementById("backToBalanceFromProfit").addEventListener("click", () => {
+            profitSummary.classList.add("hidden");
+            initialView.classList.remove("hidden");
+        });
+
+        // Dummy data for initial balance display
+        let currentBalance = 0;
+        document.getElementById("currentBalance").textContent = currentBalance;
+
+        // Event listeners and form handling for stock, sales, and expenses can be added here
     </script>
+
+    
 </body>
 </html>
