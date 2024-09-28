@@ -1,0 +1,144 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    flex-direction: column;
+    padding-top: 80px;
+}
+
+/* Header styling */
+.header-container {
+    width: 100%;
+    background: linear-gradient(90deg, #052f5b, #00bfff);
+    color: #fff;
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+}
+
+.header-container .logo a {
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+    color: white;
+}
+
+.header-container nav {
+    display: flex;
+    gap: 20px;
+}
+
+.header-container nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    transition: color 0.3s;
+}
+
+.header-container nav a:hover {
+    color: #333;
+}
+
+/* about us styling */
+.about-us-section {
+    max-width: 800px;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin: auto;
+    flex-grow: 1;
+}
+
+h1 {
+    padding-bottom: 2%;
+    font-size: 2em;
+    text-align: center;
+    color: #052f5b;
+}
+
+p {
+    margin-bottom: 1em;
+    line-height: 1.6;
+    font-size: 1em;
+}
+
+/* Footer styling */
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: linear-gradient(90deg, #052f5b, #00bfff);
+    color: #fff;
+    text-align: center;
+    padding: 15px;
+}
+
+footer .social-icons {
+    margin-top: 10px;
+}
+
+footer .social-icons a {
+    color: #fff;
+    margin: 0 10px;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+footer .social-icons a:hover {
+    color: #333;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .header-container nav {
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    .about-us-section {
+        margin: 30px 10px;
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.5em;
+    }
+
+    p {
+        font-size: 0.9em;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.3em;
+    }
+
+    p {
+        font-size: 0.85em;
+    }
+
+    footer {
+        font-size: 0.9em;
+    }
+}
