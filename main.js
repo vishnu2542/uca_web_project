@@ -152,7 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <td>${stock[item].quantity}</td>
                     <td>$${stock[item].price}</td>
                     <td>${stock[item].profitPercent}%</td>
-                    <td><button class="remove-btn" onclick="removeStock('${item}')">Remove</button></td>
+                    <td><button class="remove-btn" onclick="removeStock('${item}')"><i class="fa-solid fa-trash"></i></button></td>
                 </tr>`;
         }
     }
